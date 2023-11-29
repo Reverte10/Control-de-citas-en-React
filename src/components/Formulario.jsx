@@ -1,8 +1,8 @@
 function Formulario() {
   return (
     <div className="md:w-1/2 lg:w-2/5">
-      <h3 className="font-black text-3xl text-center">Seguimiento Pacientes</h3>
-      <p className="text-lg mt-5 text-center mb-10">
+      <h2 className="font-black text-3xl text-center">Seguimiento Pacientes</h2>
+      <p className="text-xl mt-5 text-center mb-10">
         Añade paciente y {' '}
         <span className="text-indigo-600 font-bold">Administralo</span>
       </p>
@@ -49,18 +49,18 @@ function Formulario() {
 
         <div className="mb-5">
           <label htmlFor='sintomas' className="block text-gray-700 uppercase font-bold">Síntomas</label>
-          <textarea 
-          className="border-2 w-full p-2 mt-2 placeholder-gray-400 " 
-          id="sintomas" 
-          placeholder="Describe los Síntomas"
+          <textarea
+            className="border-2 w-full p-2 mt-2 placeholder-gray-400 "
+            id="sintomas"
+            placeholder="Describe los Síntomas"
           />
 
         </div>
 
-        <input 
-        type="submit"
-        className="bg-indigo-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-indigo-700 cursor-pointer transition-all" 
-        value="Agregar Paciente"
+        <input
+          type="submit"
+          className="bg-indigo-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-indigo-700 cursor-pointer transition-all"
+          value="Agregar Paciente"
         />
 
       </form>
