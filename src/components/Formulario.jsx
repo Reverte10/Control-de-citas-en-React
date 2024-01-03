@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Error from './Error';
 
-function Formulario({ pacientes, setPacientes, paciente }) {
+function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
   const [nombre, setNombre] = useState('');
   const [propietario, setPropietario] = useState('');
   const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ function Formulario({ pacientes, setPacientes, paciente }) {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if( Object.keys(paciente).length > 0) {
+    if (Object.keys(paciente).length > 0) {
       setNombre(paciente.nombre)
       setPropietario(paciente.propietario)
       setEmail(paciente.email)
@@ -41,17 +41,28 @@ function Formulario({ pacientes, setPacientes, paciente }) {
       propietario,
       email,
       fecha,
-      sintomas,
-      id : generarId()
+      sintomas
     }
 
-    setPacientes([...pacientes, objetoPaciente])
+    if (paciente.id) {
+      objetoPaciente.id = paciente.id
 
-    setNombre ('')
-    setPropietario ('')
-    setEmail ('')
-    setFecha ('')
-    setSintomas ('')
+      const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState )
+
+      setPacientes (pacientesActualizados)
+      setPaciente ({})
+
+    } else {
+      objetoPaciente.id = generarId();
+      setPacientes([...pacientes, objetoPaciente])
+    }
+
+
+    setNombre('')
+    setPropietario('')
+    setEmail('')
+    setFecha('')
+    setSintomas('')
 
   }
 
@@ -67,7 +78,7 @@ function Formulario({ pacientes, setPacientes, paciente }) {
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
-        {error && <Error mensaje = 'Todos los campos son obligatorios'/>}
+        {error && <Error mensaje='Todos los campos son obligatorios' />}
         <div className="mb-5">
           <label htmlFor='mascota' className="block text-gray-700 uppercase font-bold">Nombre Mascota</label>
           <input
@@ -130,7 +141,7 @@ function Formulario({ pacientes, setPacientes, paciente }) {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold rounded-md hover:bg-indigo-700 cursor-pointer transition-all"
-          value="Agregar Paciente"
+          value={paciente.id ? 'Editar Paciente' : 'Agregar Paciente'}
         />
 
       </form>
